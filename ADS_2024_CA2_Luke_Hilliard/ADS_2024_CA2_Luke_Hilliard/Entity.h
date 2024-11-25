@@ -18,7 +18,7 @@ public:
     // >>
     friend std::ostream& operator<<(std::ostream& os, const Entity<K, V>& e)
     {
-        os << "{ " << e.key << ",,, " << e.value << " }";
+        os << "{ " << e.key << ", " << e.value << " }";
         return os;
     }
 };
@@ -29,6 +29,7 @@ Entity<K, V>::Entity(K key, V value)
     this->key = key;
     this->value = value;
 }
+
 template <typename K, typename V>
 Entity<K, V>::Entity()
 {
