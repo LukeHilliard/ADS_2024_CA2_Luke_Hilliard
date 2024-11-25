@@ -15,10 +15,18 @@ int main() {
     bTree.add(e2);
     bTree.add(e3);
 
+    std::cout << "Post Order" << std::endl;
     bTree.printPostOrder();
 
+    std::cout << "Pre Order" << std::endl;
+    bTree.printPreOrder();
 
+    std::cout << "In Order" << std::endl;
+    bTree.printInOrder();
 
+    std::cout << "Root" << std::endl;
+    std::cout << bTree.root->getItem() << std::endl;
 
+    T
     return 0;
 }
