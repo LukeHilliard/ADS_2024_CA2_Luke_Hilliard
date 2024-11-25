@@ -1,2 +1,4 @@
 .vs/
 /ARM64/
+x64/
+.vcxproj

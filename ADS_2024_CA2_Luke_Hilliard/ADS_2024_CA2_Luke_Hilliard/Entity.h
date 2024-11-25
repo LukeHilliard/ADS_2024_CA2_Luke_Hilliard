@@ -3,42 +3,61 @@ template <typename K, typename V>
 class Entity {
     K key;
     V value;
-
 public:
-    Entity(K key, V value);
-    K& getKey();
-    V& getValue();
-    void setKey(K key);
-    void setValue(V value);
-    ~Entity();
-
-
-    Entity::Entity(K key, V value)
+   
+    Entity(K key, V value)
     {
         this->key = key;
         this->value = value;
+    }
+    Entity()
+    {
+        this->key = K();
+        this->value = V();
     }
 
   
-    K& Entity::getKey() {
+    K& getKey() {
         return key;
     }
 
-    V& Entity::getValue() {
+    V& getValue() {
         return value;
     }
 
-    void Entity::setKey(K key) {
+    void setKey(K key) {
         this->key = key;
     }
 
-    void Entity::setValue(V value) {
+    void setValue(V value) {
         this->value = value;
     }
 
-    Entity::~Entity()
+    ~Entity() {}
+
+
+    // >
+    bool operator>(const Entity& other)
     {
-        this->key = nullptr;
-        this->value = nullptr;
+        return value > other.value;
+    }
+
+    // <
+    bool operator<(const Entity& other)
+    {
+        return value < other.value;
+    }
+
+    // ==
+    bool operator==(const Entity& other)
+    {
+        return this->key == other.key;
+    }
+
+    // >>
+    friend std::ostream& operator<<(std::ostream& os, const Entity& e)
+    {
+        os << "{ " << e.key << ", " << e.value << " }";
+        return os;
     }
 };
