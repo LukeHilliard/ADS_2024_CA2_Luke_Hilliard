@@ -18,7 +18,7 @@ public:
     // >>
     friend std::ostream& operator<<(std::ostream& os, const Entity<K, V>& e)
     {
-        os << "{ " << e.key << ", " << e.value << " }";
+        os << "{" << e.key << ", " << e.value << "}, ";
         return os;
     }
 };
