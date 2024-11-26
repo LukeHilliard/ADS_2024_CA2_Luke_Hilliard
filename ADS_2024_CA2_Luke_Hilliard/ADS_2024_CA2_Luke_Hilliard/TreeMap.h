@@ -50,7 +50,7 @@ template <class K, class V>
 bool TreeMap<K, V>::containsKey(K key)
 {
 	//std::cout << "Looking for " << key << endl;
-	Entity<K, V> target(key, "");
+	Entity<K, V> target(key, V());
 	// start at root key
 	BSTNode<Entity<K, V>>* currentNode = this->tree.root;
 
@@ -77,10 +77,36 @@ bool TreeMap<K, V>::containsKey(K key)
 	return false; // node = nullptr so key not within BinaryTree
 }
 
+
+
+/*
+	Algorithm
+
+	Same as containsKey()
+
+
+*/
 template <class K, class V>
 V& TreeMap<K, V>::get(K key)
 {
+	Entity<K, V> target(key, "Key not found.");
+	BSTNode<Entity<K, V>>* currentNode = this->tree.root;
 
+	while (currentNode != nullptr)
+	{
+		if (currentNode->getItem() == target)
+			return currentNode->getItem().getValue();
+
+		if (target < currentNode->getItem())
+			currentNode = currentNode->getLeft();
+
+		else
+			currentNode = currentNode->getRight();
+	}
+	return target.getValue(); // TODO I think this part is incorrect
+
+
+	
 }
 
 template <class K, class V>
