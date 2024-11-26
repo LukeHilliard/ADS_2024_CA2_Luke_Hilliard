@@ -133,7 +133,6 @@ void TreeMap<K, V>::keySetRecur(BSTNode<Entity<K, V>>* node, BinaryTree<K>& keys
 	// traverse tree In Order and add items to keys
 	if (node != nullptr)
 	{
-		std::cout << "Visiting node with key: " << node->getItem().getKey() << std::endl;
 		keySetRecur(node->getLeft(), keys);
 		keys.add(node->getItem().getKey());
 		keySetRecur(node->getRight(), keys);

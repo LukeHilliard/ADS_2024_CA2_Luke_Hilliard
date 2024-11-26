@@ -91,10 +91,18 @@ int main() {
     std::cout << "** keySet()" << std::endl;
     BinaryTree<int> keys = tMap.keySet();
     keys.printInOrder();
+    std::cout << "\n" << std::endl;
 
 
-    std::cout << "Operator[] overloaded" << endl;
+    std::cout << "Operator[] overloaded" << std::endl;
     std::cout << tMap[4] << std::endl;
+    std::cout << "\n" << std::endl;
+
+
+    std::cout << "clear()" << std::endl;
+    tMap.clear();
+    std::cout << "Size: " << tMap.size() << std::endl;
+    std::cout << "\n" << std::endl;
 
 
     return 0;
