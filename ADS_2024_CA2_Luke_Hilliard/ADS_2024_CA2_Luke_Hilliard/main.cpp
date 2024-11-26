@@ -93,5 +93,9 @@ int main() {
     keys.printInOrder();
 
 
+    std::cout << "Operator[] overloaded" << endl;
+    std::cout << tMap[4] << std::endl;
+
+
     return 0;
 }
