@@ -63,14 +63,14 @@ void Entity<K, V>::setValue(V value) {
 template <typename K, typename V>
 bool Entity<K, V>::operator>(const Entity<K, V>& other)
 {
-    return value > other.value;
+    return this->key > other.key;
 }
 
 // <
 template <typename K, typename V>
 bool Entity<K, V>::operator<(const Entity<K, V>& other)
 {
-    return value < other.value;
+    return this->key < other.key;
 }
 
 // ==
