@@ -18,6 +18,10 @@ public:
 	void put(K key, V value);
 	int size();
 	bool removeKey(K key);
+	V& operator[](K key) {
+		if (containsKey(key))
+			return get(key);
+	}
 
 
 };
