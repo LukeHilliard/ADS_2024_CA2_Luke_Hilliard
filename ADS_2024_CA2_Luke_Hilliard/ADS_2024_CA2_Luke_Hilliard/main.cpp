@@ -1,109 +1,50 @@
 #include <iostream>
+#include <fstream>
+#include <string>
+
 #include "Entity.h"
 #include "BinaryTree.h"
 #include "TreeMap.h"
 
 
+
+void part_2_unique_words();
+
+/*
+    Using only your own implementation of the TreeMap and BST tree (SET) create an application that
+    reads in a text file and organises all of the unique words contained within the file by their first letter.
+
+    When the user runs the programme, they should be able to view
+        • The list of letters for which there were words in the file.
+        • All of the words associated with a given letter.
+
+    Modify the print methods of the Binary Tree Starter Code for display
+*/
+
+void part_2_unique_words() 
+{
+    ifstream file("unique_words.txt");
+
+    if (!file.is_open()) 
+        std::cout << "Could not find file" << std::endl;
+    else {
+        std::string s;
+        while(getline(file, s)) {
+            Entity<char, std::string> entry(s[0], s);
+            std::cout << entry << std::endl;
+        }
+    }
+
+    
+
+}
+
+
+
 int main() {
 
-    BinaryTree<Entity<std::string, int>> bTree;
-    Entity<std::string, int> e1("First", 4);
-    Entity<std::string, int> e2("Second", 2);
-    Entity<std::string, int> e3("Third", 6);
-    Entity<std::string, int> e4("Fourth", 8);
-    Entity<std::string, int> e5("Fifth", 10);
-    Entity<std::string, int> e6("Sixth", 1);
-    Entity<std::string, int> e7("Seventh", 7);
-    Entity<std::string, int> e8("Eighth", 3);
-    Entity<std::string, int> e9("Ninth", 5);
-    Entity<std::string, int> e10("Tenth", 9);
- 
-
-    bTree.add(e1);
-    bTree.add(e2);
-    bTree.add(e3);
-    bTree.add(e4);
-    bTree.add(e5);
-    bTree.add(e6);
-    bTree.add(e7);
-    bTree.add(e8);
-    bTree.add(e9);
-    bTree.add(e10);
-
-    std::cout << "Using BinaryTree<Entity>" << std::endl;
-    std::cout << "Post Order" << std::endl;
-    bTree.printPostOrder();
-    std::cout << "\n" << std::endl;
-
-    std::cout << "Pre Order" << std::endl;
-    bTree.printPreOrder();
-    std::cout << "\n" << std::endl;
-
-    std::cout << "In Order" << std::endl;
-    bTree.printInOrder();
-    std::cout << "\n" << std::endl;
-
-    std::cout << "Root" << std::endl;
-    std::cout << bTree.root->getItem() << "\n\n" << std::endl;
-    
-
-
-    std::cout << "Using TreeMap" << std::endl;
-    TreeMap<int, std::string> tMap;
-    tMap.put(1, "First");
-    tMap.put(2, "Second");
-    tMap.put(3, "Third");
-    tMap.put(4, "Fourth");
-    tMap.put(5, "Fifth");
-    tMap.put(6, "Sixth");
-    tMap.put(7, "Seventh");
-    tMap.put(8, "Eighth");
-    tMap.put(9, "Ninth");
-    tMap.put(10, "Tenth");
-
-
-
-    std::cout << "** containsKey()" << std::endl;
-    std::cout << (tMap.containsKey(4) ? "True" : "False") << std::endl;
-    std::cout << "\n" << std::endl;
-
-    std::cout << "** get()" << std::endl;
-    string found = tMap.get(5);
-
-    if(found.empty())
-        std::cout << "Key not found." << std::endl;
-    else
-        std::cout << found << std::endl;
-    std::cout << "\n" << std::endl;
-    
-    int tbr = 5;
-    std::cout << "** removeKey()" << std::endl;
-    std::cout << "Does map contain " << tbr << "? :" << (tMap.containsKey(tbr) ? "True" : "False") << std::endl;
-    std::cout << "Size: " << tMap.size() << std::endl;
-    std::cout << "Removing " << tbr << "\n" << std::endl;
-    
-    tMap.removeKey(tbr);
-    
-    std::cout << "Does map contain " << tbr << "? :" << (tMap.containsKey(tbr) ? "True" : "False") << std::endl;
-    std::cout << "Size: " << tMap.size() << std::endl;
-    std::cout << "\n" << std::endl;
-
-    std::cout << "** keySet()" << std::endl;
-    BinaryTree<int> keys = tMap.keySet();
-    keys.printInOrder();
-    std::cout << "\n" << std::endl;
-
-
-    std::cout << "Operator[] overloaded" << std::endl;
-    std::cout << tMap[4] << std::endl;
-    std::cout << "\n" << std::endl;
-
-
-    std::cout << "clear()" << std::endl;
-    tMap.clear();
-    std::cout << "Size: " << tMap.size() << std::endl;
-    std::cout << "\n" << std::endl;
-
-
+    part_2_unique_words();
     return 0;
 }
+
+
