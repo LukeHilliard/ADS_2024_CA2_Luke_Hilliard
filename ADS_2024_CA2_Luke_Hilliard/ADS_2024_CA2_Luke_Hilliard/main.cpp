@@ -63,8 +63,34 @@ int main() {
 
 
 
-    std::cout << "TreeMap containsKey" << std::endl;
+    std::cout << "** containsKey()" << std::endl;
     std::cout << (tMap.containsKey(4) ? "True" : "False") << std::endl;
+    std::cout << "\n" << std::endl;
+
+    std::cout << "** get()" << std::endl;
+    string found = tMap.get(5);
+
+    if(found.empty())
+        std::cout << "Key not found." << std::endl;
+    else
+        std::cout << found << std::endl;
+    std::cout << "\n" << std::endl;
+    
+    int tbr = 5;
+    std::cout << "** removeKey()" << std::endl;
+    std::cout << "Does map contain " << tbr << "? :" << (tMap.containsKey(tbr) ? "True" : "False") << std::endl;
+    std::cout << "Size: " << tMap.size() << std::endl;
+    std::cout << "Removing " << tbr << "\n" << std::endl;
+    
+    tMap.removeKey(tbr);
+    
+    std::cout << "Does map contain " << tbr << "? :" << (tMap.containsKey(tbr) ? "True" : "False") << std::endl;
+    std::cout << "Size: " << tMap.size() << std::endl;
+    std::cout << "\n" << std::endl;
+
+    std::cout << "** keySet()" << std::endl;
+    BinaryTree<int> keys = tMap.keySet();
+    keys.printInOrder();
 
 
     return 0;
