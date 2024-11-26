@@ -17,10 +17,8 @@ public:
 	void put(K key, V value);
 	int size();
 	bool removeKey(K key);
+	BinaryTree<Entity<K, V>>& getBTree();
 
-	void printTreeInOrder();
-	void printTreePreOrder();
-	void printTreePostOrder();
 };
 
 template <class K, class V>
@@ -36,10 +34,47 @@ void TreeMap<K, V>::clear()
 	this->_size = 0;
 }
 
+
+/*
+	Algorithm:
+			start at root
+			does node = key
+
+	no, is key less than node, yes, move to left child
+	does child = key
+	no, is key greater than node, yes, move to right child
+						does child = key
+						yes, return, no repeat
+*/
 template <class K, class V>
 bool TreeMap<K, V>::containsKey(K key)
 {
+	//std::cout << "Looking for " << key << endl;
+	Entity<K, V> target(key, "");
+	// start at root key
+	BSTNode<Entity<K, V>>* currentNode = this->tree.root;
 
+
+	if (currentNode == nullptr) {
+		return false; // if its nullptr then there is no root
+	}
+
+	while (currentNode != nullptr) {
+		// does node = key
+		if (currentNode->getItem() == target) 
+			return true;
+		
+		// no, is key less than node
+		if (target < currentNode->getItem())
+			currentNode = currentNode->getLeft(); // yes, move to left child
+	
+		// is key greater than node
+		else
+			currentNode = currentNode->getRight(); // yes, move to right child
+
+		// repeat on new child node from left/right
+	}
+	return false; // node = nullptr so key not within BinaryTree
 }
 
 template <class K, class V>
@@ -67,8 +102,6 @@ void TreeMap<K, V>::put(K key, V value)
 	Entity<K, V> newNode(key, value);
 	this->tree.add(newNode);
 	this->_size += 1;
-
-
 }
 
 template <class K, class V>
@@ -83,21 +116,4 @@ bool TreeMap<K, V>::removeKey(K key)
 
 }
 
-template <class K, class V>
-void TreeMap<K, V>::printTreeInOrder()
-{
-	this->tree.printInOrder();
-}
-
-template <class K, class V>
-void TreeMap<K, V>::printTreePreOrder()
-{
-	this->tree.printPreOrder();
-}
-
-template <class K, class V>
-void TreeMap<K, V>::printTreePostOrder()
-{
-	this->tree.printPostOrder();
-}
 

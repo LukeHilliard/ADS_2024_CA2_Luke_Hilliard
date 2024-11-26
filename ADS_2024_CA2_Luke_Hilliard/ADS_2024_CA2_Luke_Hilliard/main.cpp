@@ -33,43 +33,38 @@ int main() {
     std::cout << "Using BinaryTree<Entity>" << std::endl;
     std::cout << "Post Order" << std::endl;
     bTree.printPostOrder();
+    std::cout << "\n" << std::endl;
 
     std::cout << "Pre Order" << std::endl;
     bTree.printPreOrder();
+    std::cout << "\n" << std::endl;
 
     std::cout << "In Order" << std::endl;
     bTree.printInOrder();
+    std::cout << "\n" << std::endl;
 
     std::cout << "Root" << std::endl;
-    std::cout << bTree.root->getItem() << std::endl;
+    std::cout << bTree.root->getItem() << "\n\n" << std::endl;
+    
 
 
     std::cout << "Using TreeMap" << std::endl;
-    TreeMap<std::string, int> tMap;
-    tMap.put("First", 4);
-    tMap.put("Second", 2);
-    tMap.put("Third", 6);
-    tMap.put("Fourth", 8);
-    tMap.put("Fifth", 10);
-    tMap.put("Sixth", 1);
-    tMap.put("Seventh", 7);
-    tMap.put("Eighth", 3);
-    tMap.put("Ninth", 5);
-    tMap.put("Tenth", 9);
+    TreeMap<int, std::string> tMap;
+    tMap.put(1, "First");
+    tMap.put(2, "Second");
+    tMap.put(3, "Third");
+    tMap.put(4, "Fourth");
+    tMap.put(5, "Fifth");
+    tMap.put(6, "Sixth");
+    tMap.put(7, "Seventh");
+    tMap.put(8, "Eighth");
+    tMap.put(9, "Ninth");
+    tMap.put(10, "Tenth");
 
 
 
-    std::cout << "Tree In Order" << std::endl;
-    tMap.printTreeInOrder();
-
-    std::cout << "Tree Pre Order" << std::endl;
-    tMap.printTreePreOrder();
-
-    std::cout << "Tree Post Order" << std::endl;
-    tMap.printTreePostOrder();
-
-
-
+    std::cout << "TreeMap containsKey" << std::endl;
+    std::cout << (tMap.containsKey(4) ? "True" : "False") << std::endl;
 
 
     return 0;

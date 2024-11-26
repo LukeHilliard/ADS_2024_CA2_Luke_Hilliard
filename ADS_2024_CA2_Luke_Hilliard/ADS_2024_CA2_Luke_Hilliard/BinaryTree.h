@@ -11,7 +11,6 @@ public:
 	bool remove(T item);
 	void clear();
 	int count();
-
 	void printInOrder();
 	void printInOrder(BSTNode<T>* node);
 	void printPreOrder();
