@@ -10,18 +10,24 @@ class TreeMap
 	int _size;
 public:
 	TreeMap();
+	TreeMap(K key);
 	void clear();
 	bool containsKey(K key);
 	V& get(K key);
 	BinaryTree<K> keySet();
 	void keySetRecur(BSTNode<Entity<K, V>>* root, BinaryTree<K>& keys);
 	void put(K key, V value);
+	void put(K key);
 	int size();
 	bool removeKey(K key);
 	V& operator[](K key) {
 		if (containsKey(key))
 			return get(key);
 	}
+
+	void printLetters();
+	void printLetters(BSTNode<Entity<K, V>>* root);
+
 
 
 };
@@ -30,6 +36,13 @@ template <class K, class V>
 TreeMap<K, V>::TreeMap()
 {
 	this->_size = 0;
+}
+template <class K, class V>
+TreeMap<K, V>::TreeMap(K key)
+{
+	this->key = key;
+	this->_size = 0;
+
 }
 
 template <class K, class V>
@@ -150,9 +163,24 @@ void TreeMap<K, V>::keySetRecur(BSTNode<Entity<K, V>>* node, BinaryTree<K>& keys
 template <class K, class V>
 void TreeMap<K, V>::put(K key, V value)
 {
-	Entity<K, V> newNode(key, value);
-	this->tree.add(newNode);
-	this->_size += 1;
+	if (!containsKey(key))
+	{
+		Entity<K, V> newNode(key, value);
+		this->tree.add(newNode);
+		this->_size += 1;
+	}
+	
+}
+template <class K, class V>
+void TreeMap<K, V>::put(K key)
+{
+	if (!containsKey(key)) 
+	{
+		Entity<K, V> newNode(key);
+		this->tree.add(newNode);
+		this->_size += 1;
+	}
+	
 }
 
 template <class K, class V>
@@ -201,3 +229,22 @@ bool TreeMap<K, V>::removeKey(K key)
 }
 
 
+
+template<class K, class V>
+void TreeMap<K, V>::printLetters()
+{
+	cout << "There are " << this->size() << " different letters stored." << endl;
+	this->printLetters(this->tree.root);
+	cout << endl;
+}
+template<class K, class V>
+void TreeMap<K, V>::printLetters(BSTNode<Entity<K, V>>* node)
+{
+
+	if (node != nullptr)
+	{
+		printLetters(node->getLeft());
+		cout << "* " << node->getItem().getKey() << " *\n";
+		printLetters(node->getRight());
+	}
+}
