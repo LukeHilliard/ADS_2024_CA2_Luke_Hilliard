@@ -23,13 +23,12 @@ public:
 	V& operator[](K key) {
 		if (containsKey(key))
 			return get(key);
+		else
+			return V();
 	}
 
 	void printLetters();
 	void printLetters(BSTNode<Entity<K, V>>* root);
-
-
-
 };
 
 template <class K, class V>
@@ -104,7 +103,7 @@ bool TreeMap<K, V>::containsKey(K key)
 template <class K, class V>
 V& TreeMap<K, V>::get(K key)
 {
-	Entity<K, V> target(key, "Key not found.");
+	Entity<K, V> target(key, V());
 	BSTNode<Entity<K, V>>* currentNode = this->tree.root;
 
 	while (currentNode != nullptr)
@@ -226,25 +225,4 @@ bool TreeMap<K, V>::removeKey(K key)
 			currentNode = currentNode->getRight(); 
 	}
 	return false; // at the end of the tree so it was not found and not deleted
-}
-
-
-
-template<class K, class V>
-void TreeMap<K, V>::printLetters()
-{
-	cout << "There are " << this->size() << " different letters stored." << endl;
-	this->printLetters(this->tree.root);
-	cout << endl;
-}
-template<class K, class V>
-void TreeMap<K, V>::printLetters(BSTNode<Entity<K, V>>* node)
-{
-
-	if (node != nullptr)
-	{
-		printLetters(node->getLeft());
-		cout << "* " << node->getItem().getKey() << " *\n";
-		printLetters(node->getRight());
-	}
 }
