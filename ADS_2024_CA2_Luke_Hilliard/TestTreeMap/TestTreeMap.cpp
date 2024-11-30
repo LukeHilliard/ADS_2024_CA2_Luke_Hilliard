@@ -36,5 +36,15 @@ namespace TestTreeMap
 
 			Assert::IsTrue(tree.containsKey(30));
 		}
+
+		TEST_METHOD(TestGet)
+		{
+			TreeMap<char, int> tree;
+			tree.put('C', 5);
+			tree.put('X', 9);
+			tree.put('I', 6);
+
+			Assert::AreEqual(9, tree.get('X'));
+		}
 	};
 }
