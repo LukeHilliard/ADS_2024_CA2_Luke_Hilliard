@@ -32,6 +32,7 @@ struct Car {
 		this->fuel = fuel;
 	}
 
+
 };
 /*
 Write a C++ application which will allow a user to view and search the data generated in stage 3. Your
@@ -49,15 +50,16 @@ All data should be clearly and neatly presented. Efficient memory management mus
 class DataViewer {
 	
 	std::string filePath;
-	std::vector<Car*> cars;
+	std::vector<Car> cars;
 
 public:
 	DataViewer(const string file);
 
-	void viewAll(vector<Car*>& cars);
-	void createIndex(vector<Car*>& cars);
-	vector<Car*>& readInCsv(vector<Car*>& items);
+	void viewAll();
+	TreeMap<std::string, vector<Car>> createIndex(std::string key);
+	void readInCsv();
 	void run();
+	
 };
 
 DataViewer::DataViewer(const string file)
@@ -66,8 +68,8 @@ DataViewer::DataViewer(const string file)
 }
 
 
-//https://www.simplilearn.com/tutorials/cpp-tutorial/cpp-setprecision#:~:text=How%20to%20set%20precision%20in,from%20the%20header.
-vector<Car*>& DataViewer::readInCsv(vector<Car*>& items)
+// https://www.simplilearn.com/tutorials/cpp-tutorial/cpp-setprecision#:~:text=How%20to%20set%20precision%20in,from%20the%20header.
+void DataViewer::readInCsv()
 {
 	
 	ifstream file(this->filePath);
@@ -89,68 +91,145 @@ vector<Car*>& DataViewer::readInCsv(vector<Car*>& items)
 				line.erase(0, pos + 1);
 			}
 
+			if (tokens.size() == 6) {
+				std::string make = tokens[0];
+				std::string model = tokens[1];
+				int year = std::stoi(tokens[2]);
+				int mileage = std::stoi(tokens[3]);
+				double engineSize = std::stod(tokens[4]);
+				std::string fuel = tokens[5];
 
-			std::string make = tokens[0];
-			std::string model = tokens[1];
-			int year = std::stoi(tokens[2]);
-			int mileage = std::stoi(tokens[3]);
-			double engineSize = std::stod(tokens[4]);
-			std::string fuel = tokens[5];
+				Car car(make, model, year, mileage, engineSize, fuel);
 
-			Car* car = new Car(make, model, year, mileage, engineSize, fuel);
+				//std::cout << car << "\n" << std::endl;
 
-			//std::cout << car << "\n" << std::endl;
-
-			items.push_back(car);
-		
-			
+				this->cars.push_back(car);
+			}
 		}
 	}
-	return items;
 }
 
-void DataViewer::createIndex(vector<Car*>& cars)
-{
-	std::cout << "(make, model, year, mileage, engineSize, fuel)" << std::endl;
-	std::cout << "Enter a field to index : ";
-	std::string field;
-	cin >> field;
-	std::cout << std::endl;
 
-	TreeMap<std::string, int> map;
-
-	for (const Car* car : cars) {
-		
-	}
-}
-
-void DataViewer::viewAll(vector<Car*>& cars)
+void DataViewer::viewAll()
 {
 	int index = 1;
-	for (const Car* car : cars) {
+	for (const Car car : this->cars) {
 		std::cout << "(" << index << ")" << std::endl;
- 		std::cout << *car << "\n" << std::endl;
+		std::cout << car << "\n" << std::endl;
 		index++;
 	}
 }
 
+TreeMap<std::string, vector<Car>> DataViewer::createIndex(std::string key)
+{
+	TreeMap<std::string, vector<Car>> carMap;
+
+	std::cout << "Enter a value from field - ['"<< key << "']" << ": ";
+	std::string value;
+	cin >> value;
+	std::cout << std::endl;
+
+	
+	vector<Car> matches;
+
+	for (Car car : this->cars) {
+		
+		//std::cout << car << std::endl;
+		if (key == "make")
+		{
+			if (car.make == value)
+				matches.push_back(car);
+		}
+		else if (key == "model")
+		{
+			if(car.model == value)
+				matches.push_back(car);
+		}
+		else if (key == "year")
+		{
+			if(to_string(car.year) == value)
+				matches.push_back(car);
+		}
+		else if (key == "mileage")
+		{
+			if(to_string(car.mileage) == value)
+				matches.push_back(car);
+		}
+		else if (key == "engineSize")
+		{
+			if(to_string(car.engineSize) == value)
+				matches.push_back(car);
+		}
+		else if (key == "fuel")
+		{
+			if(car.fuel == value)
+				matches.push_back(car);
+		}
+	}
+	carMap.put(key, matches);
+	std::cout << "Mathes Length: " << matches.size() << std::endl;
+
+	return carMap;
+}
+
+
+
+
 void DataViewer::run()
 {
 
-	readInCsv(this->cars);
-	std::cout << this->cars.size() << std::endl;
-	int option;
-	std::cout << " 1. View All" << std::endl;
-	std::cout << " 2. " << std::endl;
-	std::cout << " 3. " << std::endl;
-	std::cout << "-1. Return" << std::endl;
-	std::cin >> option;
+	readInCsv();
+	while (true) {
+		std::cout << "size after reading: " << this->cars.size() << std::endl;
+		int option;
+		std::cout << " 1. View All" << std::endl;
+		std::cout << " 2. Create Index" << std::endl;
+		std::cout << " 3. View Subset" << std::endl;
+		std::cout << "-1. Return" << std::endl;
+		std::cin >> option;
 
-	
-	if (option == 1) {
-		this->viewAll(this->cars);
+
+		if (option == 1)
+		{
+			this->viewAll();
+		}
+		else if (option == 2)
+		{
+		
+			std::cout << "(make, model, year, mileage, engineSize, fuel)" << std::endl;
+			std::cout << "Enter a field to index: ";
+			std::string field;
+			cin >> field;
+			std::cout << std::endl;
+			TreeMap<std::string, vector<Car>> map = createIndex(field);
+
+			std::vector<Car> uniqueCars = map.get(field);
+			std::cout << uniqueCars.size() << std::endl;
+			for (int i = 0; i < uniqueCars.size(); i++)
+			{
+				std::cout << uniqueCars[i] << "\n" << std::endl;
+				
+			}
+			
+		
+
+			
+			
+			
+			
+			
+		}
+		else if (option == -1)
+		{
+			
+			
+			return;
+		}
 	}
+	
+
 
 
 
 }
+
