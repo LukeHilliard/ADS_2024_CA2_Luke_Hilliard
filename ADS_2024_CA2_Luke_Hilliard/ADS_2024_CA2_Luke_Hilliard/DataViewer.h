@@ -173,8 +173,6 @@ TreeMap<std::string, vector<Car>> DataViewer::createIndex(std::string key)
 }
 
 
-
-
 void DataViewer::run()
 {
 
@@ -195,7 +193,6 @@ void DataViewer::run()
 		}
 		else if (option == 2)
 		{
-		
 			std::cout << "(make, model, year, mileage, engineSize, fuel)" << std::endl;
 			std::cout << "Enter a field to index: ";
 			std::string field;
@@ -205,19 +202,12 @@ void DataViewer::run()
 
 			std::vector<Car> uniqueCars = map.get(field);
 			std::cout << uniqueCars.size() << std::endl;
+
+			std::cout << "** Subset of data ** " << std::endl;
 			for (int i = 0; i < uniqueCars.size(); i++)
 			{
 				std::cout << uniqueCars[i] << "\n" << std::endl;
-				
-			}
-			
-		
-
-			
-			
-			
-			
-			
+			}	
 		}
 		else if (option == -1)
 		{
