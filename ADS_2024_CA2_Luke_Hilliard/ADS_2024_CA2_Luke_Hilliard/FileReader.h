@@ -72,7 +72,7 @@ void FileReader::run()
         std::cout << "Could not find file" << std::endl;
     else {
         std::string s;
-        while (std::getline(file, s)) {
+        while (getline(file, s)) {
             wordsFromFile.push_back(s);
         }
 
