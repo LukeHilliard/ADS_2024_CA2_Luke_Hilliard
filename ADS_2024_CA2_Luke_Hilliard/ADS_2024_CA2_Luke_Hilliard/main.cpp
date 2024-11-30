@@ -1,5 +1,5 @@
 #include "FileReader.h"
-
+#include "DataViewer.h"
 int main()
 {
 	bool exit = false;
@@ -21,7 +21,8 @@ int main()
 		}
 		else if (choice == 2)
 		{
-			
+			DataViewer viewer("dataProject.csv");
+			viewer.run();
 		}
 		else if (choice == -1)
 		{
