@@ -26,9 +26,6 @@ public:
 		else
 			return V();
 	}
-
-	void printLetters();
-	void printLetters(BSTNode<Entity<K, V>>* root);
 };
 
 template <class K, class V>
