@@ -36,8 +36,6 @@ namespace TestTreeMap
 
 			Assert::IsTrue(tree.containsKey(30));
 		}
-<<<<<<< Updated upstream
-=======
 
 		TEST_METHOD(TestGet)
 		{
@@ -72,6 +70,6 @@ namespace TestTreeMap
 
 			Assert::IsTrue(tree.containsKey(1));
 		}
->>>>>>> Stashed changes
+
 	};
 }
