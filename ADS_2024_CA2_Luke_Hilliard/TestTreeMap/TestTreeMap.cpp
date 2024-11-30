@@ -36,5 +36,42 @@ namespace TestTreeMap
 
 			Assert::IsTrue(tree.containsKey(30));
 		}
+<<<<<<< Updated upstream
+=======
+
+		TEST_METHOD(TestGet)
+		{
+			TreeMap<char, int> tree;
+			tree.put('C', 5);
+			tree.put('X', 9);
+			tree.put('I', 6);
+
+			Assert::AreEqual(9, tree.get('X'));
+		}
+
+		TEST_METHOD(TestKeySet)
+		{
+			TreeMap<char, int> tree;
+			tree.put('C', 5);
+			tree.put('X', 9);
+			tree.put('I', 6);
+
+			BinaryTree<char> base;
+			base.add('C');
+			base.add('X');
+			base.add('I');
+
+			;			BinaryTree<char> keys = tree.keySet();
+			Assert::AreEqual(keys, base);
+		}
+
+		TEST_METHOD(TestPut)
+		{
+			TreeMap<int, int> tree;
+			tree.put(1, 0);
+
+			Assert::IsTrue(tree.containsKey(1));
+		}
+>>>>>>> Stashed changes
 	};
 }
