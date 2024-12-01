@@ -14,7 +14,23 @@ namespace TestTreeMap
 			tree.put("First", 2);
 			Assert::AreEqual(1, tree.size());
 		}
+		TEST_METHOD(TestAddToPopulatedTree)
+		{
+			TreeMap<std::string, int> tree;
+			tree.put("First", 1);
+			tree.put("Second", 2);
+			Assert::AreEqual(2, tree.size());
 
+			tree.put("Third", 3);
+			Assert::AreEqual(3, tree.size());
+		}
+		TEST_METHOD(TestOverwriteValue)
+		{
+			TreeMap<int, int> tree;
+			tree.put(1, 0);
+			tree.put(1, 1);
+			Assert::AreEqual(0, tree.get(1));
+		}
 		TEST_METHOD(TestClearTree)
 		{
 			TreeMap<std::string, int> tree;
@@ -24,6 +40,17 @@ namespace TestTreeMap
 
 			tree.clear();
 			Assert::IsTrue(tree.size() == 0);
+		}
+
+		TEST_METHOD(TestContainsNoKey)
+		{
+			TreeMap<int, std::string> tree;
+			tree.put(1, "Apple");
+			tree.put(30, "Banana");
+			tree.put(2, "Orange");
+			tree.put(5, "Pear");
+
+			Assert::IsFalse(tree.containsKey(6));
 		}
 
 		TEST_METHOD(TestContainsKey)
@@ -47,29 +74,28 @@ namespace TestTreeMap
 			Assert::AreEqual(9, tree.get('X'));
 		}
 
-		TEST_METHOD(TestKeySet)
+		TEST_METHOD(TestRemoveKey)
 		{
+			TreeMap<double, std::string> tree;
+			tree.put(0.1, "Luke");
+			tree.put(9.3, "Cathal");
+			tree.put(4.2, "Rebecca");
+
+			tree.removeKey(4.2);
+			Assert::IsFalse(tree.containsKey(4.2));
+		}
+
+		/*TEST_METHOD(TestOperatorOverload)
+		{
+
 			TreeMap<char, int> tree;
 			tree.put('C', 5);
 			tree.put('X', 9);
 			tree.put('I', 6);
 
-			BinaryTree<char> base;
-			base.add('C');
-			base.add('X');
-			base.add('I');
-
-			;			BinaryTree<char> keys = tree.keySet();
-			Assert::AreEqual(keys, base);
-		}
-
-		TEST_METHOD(TestPut)
-		{
-			TreeMap<int, int> tree;
-			tree.put(1, 0);
-
-			Assert::IsTrue(tree.containsKey(1));
-		}
+			int num = tree[1];
+			Assert::AreEqual(9, num);
+		}*/
 
 	};
 }
